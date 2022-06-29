@@ -1,19 +1,21 @@
 # Firebase Messaging Manager
+
 <p> This plugin will help you to configure onClick of Push Notification and also will help you to handle click of Notification. You just need to send push notification with below Format from server side.</p>
-    ```
-      "notification": {
-         "body": "a",
-          "title": "",
-          "mutable_content": false
-      },
-      "data":{
-          "click_action": "FLUTTER_NOTIFICATION_CLICK",
-          "body": "body",
-          "title": "title"
-      },
-      "to": "dBfQ3ArwSwmXB0B9mDEkpf:APA91bGDcPWgnp8VKC79H1P-u6D1fzxH0tieUvTZV-Zxui7jaVmN55S3EmonzgIpGMZrelVRukoDBdOGLe1NYodKklf6olmiAad2iqr9-1tb5obDQufLw1OYkMvlaIHXAWJ6uEgfEdAx"
-      }
-    ```
+
+```
+        "notification": {
+            "body": "body",
+            "title": "title",
+            "mutable_content": false
+        },
+        "data":{
+            "click_action": "FLUTTER_NOTIFICATION_CLICK",
+            "body": "body",
+            "title": "title"
+        },
+        "to": "dBfQ3ArwSwmXB0B9mDEkpf:APA91bGDcPWgnp8VKC79H1P-u6D1fzxH0tieUvTZV-Zxui7jaVmN55S3EmonzgIpGMZrelVRukoDBdOGLe1NYodKklf6olmiAad2iqr9-1tb5obDQufLw1OYkMvlaIHXAWJ6uEgfEdAx"
+        }
+```
 
 ## Table Of Contents
 
@@ -40,13 +42,15 @@ firebase_messaging_manager:
 
 - Add `google-services.json` to your `android/app` folder which is connected with your package name.
 - Add 'app_icon.png' to your `android/app/src/main/drawable` folder.
-- Add below `intent-filter` inside your `AndoridManifest.xml` and wrap it with your `MainActivity.kt`.
+- Add below `intent-filter` inside your `AndoridManifest.xml` and wrap it with
+  your `MainActivity.kt`.
   ``` 
   <intent-filter>
                     <action android:name="FLUTTER_NOTIFICATION_CLICK" />
                     <category android:name="android.intent.category.DEFAULT" />
                 </intent-filter>
   ```
+
 </details>
 
 <details>
