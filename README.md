@@ -111,6 +111,11 @@ firebase_messaging_manager:
                     <category android:name="android.intent.category.DEFAULT" />
                 </intent-filter>
   ```
+- Add below line to your `android/app/build.gradle` at very bottom.
+``` apply plugin: 'com.google.gms.google-services' ```
+
+- Add classpath for google-services to your `android/build.gradle` as below.
+```  classpath 'com.google.gms:google-services:4.3.10'  ```
 
 </details>
 
