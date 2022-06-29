@@ -5,11 +5,10 @@
 
 * [Installation](#Installation)
 * [Setup](#Setup)
-* [How To Use](#How To Use)
+* [How To Use](#how-to-use)
 
 ## Installation
 ---
-
 - Add Below dependency in your pubspec.yaml file.
 
 ```
