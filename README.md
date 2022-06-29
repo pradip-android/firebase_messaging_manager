@@ -4,11 +4,15 @@
 
 ```
         "notification": {
+            "type":"type",
+            "id":"id",
             "body": "body",
             "title": "title",
             "mutable_content": false
         },
         "data":{
+            "type":"type",
+            "id":"id",
             "click_action": "FLUTTER_NOTIFICATION_CLICK",
             "body": "body",
             "title": "title"
