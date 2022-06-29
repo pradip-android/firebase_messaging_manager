@@ -1,17 +1,21 @@
 # Firebase Messaging Manager
 
 <p> This plugin will help you to configure onClick of Push Notification and also will help you to handle click of Notification. You just need to send push notification with below Format from server side.</p>
+
 <details>
-<summary>With Legacy Enabled</summary>
+<summary>With Legacy Enabled Push Notification</summary>
 <br/>
 
 [https://fcm.googleapis.com/fcm/send](https://fcm.googleapis.com/fcm/send)
 
 #### Header:
-```Authorization : key=Your_Server_Key``` 
 
-#### Request:
+```Authorization : key=Your_Server_Key```
+
+#### Payload:
+
 ```
+      {
         "notification": {
             "type":"type",
             "id":"id",
@@ -27,9 +31,53 @@
             "title": "title"
         },
         "to": "dBfQ3ArwSwmXB0B9mDEkpf:APA91bGDcPWgnp8VKC79H1P-u6D1fzxH0tieUvTZV-Zxui7jaVmN55S3EmonzgIpGMZrelVRukoDBdOGLe1NYodKklf6olmiAad2iqr9-1tb5obDQufLw1OYkMvlaIHXAWJ6uEgfEdAx"
+      }
+```
+
+</details>
+
+<details>
+<summary>With Http V1 Push Notification</summary>
+<br/>
+
+[https://fcm.googleapis.com/v1/projects/[Your-Project-ID]/messages:send](https://fcm.googleapis.com/v1/projects/[Your-Project-ID]/messages:send)
+
+#### Header:
+
+- For Authorization please follow below link for Http V1.
+  [https://firebase.google.com/docs/cloud-messaging/migrate-v1#update-authorization-of-send-requests](https://firebase.google.com/docs/cloud-messaging/migrate-v1#update-authorization-of-send-requests)
+
+#### Payload:
+
+```
+        {
+          "message": {
+            "topic": "news",
+            "notification": {
+              "title": "Breaking News",
+              "body": "New news story available."
+            },
+            "data": {
+              "story_id": "story_12345"
+            },
+            "android": {
+              "notification": {
+                 "click_action": "TOP_STORY_ACTIVITY"
+              }
+            },
+            "apns": {
+              "payload": {
+                "aps": {
+                  "category" : "NEW_MESSAGE_CATEGORY"
+                }
+              }
+            }
+          }
         }
 ```
+
 </details>
+
 ## Table Of Contents
 
 * [Installation](#Installation)
