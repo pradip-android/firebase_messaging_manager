@@ -1,10 +1,8 @@
-import 'package:flutter/material.dart';
-import 'dart:async';
-
-import 'package:flutter/services.dart';
 import 'package:firebase_messaging_manager/firebase_messaging_manager.dart';
+import 'package:firebase_messaging_manager/model/notification_callback.dart';
+import 'package:flutter/material.dart';
 
-void main() async{
+void main() async {
   await FirebaseMessagingManager.instance.init();
   runApp(const MyApp());
 }
@@ -17,10 +15,12 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   @override
-  void initState() {
+  void initState() async {
     super.initState();
+    await FirebaseMessagingManager.instance
+        .configureCallBackForClick(NotificationCallback(onNotificationClick: _onNotificationClick));
+    String? token = await FirebaseMessagingManager.instance.getToken();
   }
 
   @override
@@ -35,5 +35,8 @@ class _MyAppState extends State<MyApp> {
         ),
       ),
     );
+  }
+
+  void _onNotificationClick({id, String? type}) {
   }
 }
