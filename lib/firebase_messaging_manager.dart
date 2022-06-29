@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -69,8 +68,7 @@ class FirebaseMessagingManager {
 
   _onLaunchNotification(RemoteMessage? message) async {
     debugPrint("Message: ${jsonEncode(message?.data)}");
-    notification_model.Notification? notification = notification_model.Notification.fromJson(
-        (Platform.isAndroid ? message?.data : message?.notification?.toMap()) ?? {});
+    notification_model.Notification? notification = notification_model.Notification.fromJson(message?.data ?? {});
     if (notification.type != null) openNotificationDetailScreen(notification, notificationCallback);
   }
 }
@@ -107,8 +105,8 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {}
 notificationMessageHandler(RemoteMessage message) async {
   debugPrint(
       "Message: ${jsonEncode(message.data)} or ${message.notification?.title} and ${message.notification?.body}");
-  notification_model.Notification? notification = notification_model.Notification.fromJson(
-      (Platform.isAndroid ? message.data : message.notification?.toMap()) ?? {});
+  notification_model.Notification? notification =
+      notification_model.Notification.fromJson((message.notification?.toMap()) ?? {});
   showNotificationWithDefaultSound(notification.id, notification.title, notification.body, notification);
 }
 
