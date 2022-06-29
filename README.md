@@ -1,6 +1,6 @@
 # Firebase Messaging Manager
 <p> This plugin will help you to configure onClick of Push Notification and also will help you to handle click of Notification. You just need to send push notification with below Format from server side.</p>
-```
+    ```
 
     "notification": {
        "body": "a",
@@ -13,8 +13,8 @@
         "title": "title"
     },
     "to": "dBfQ3ArwSwmXB0B9mDEkpf:APA91bGDcPWgnp8VKC79H1P-u6D1fzxH0tieUvTZV-Zxui7jaVmN55S3EmonzgIpGMZrelVRukoDBdOGLe1NYodKklf6olmiAad2iqr9-1tb5obDQufLw1OYkMvlaIHXAWJ6uEgfEdAx"
-}
-```
+    }
+    ```
 ## Table Of Contents
 
 * [Installation](#Installation)
