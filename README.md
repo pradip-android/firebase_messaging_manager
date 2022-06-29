@@ -44,8 +44,7 @@
 
 #### Header:
 
-- For Authorization please follow below link for Http V1.
-<br/>
+- For Authorization please follow below link for Http V1.\
   [https://firebase.google.com/docs/cloud-messaging/migrate-v1#update-authorization-of-send-requests](https://firebase.google.com/docs/cloud-messaging/migrate-v1#update-authorization-of-send-requests)
 
 #### Payload:
