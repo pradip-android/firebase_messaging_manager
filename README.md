@@ -9,7 +9,7 @@
 
 ## Installation
 ---
-- Add Below dependency in your pubspec.yaml file.
+- Add Below dependency in your `pubspec.yaml` file.
 
 ```
 firebase_messaging_manager:
@@ -23,20 +23,24 @@ firebase_messaging_manager:
 <details>
 <summary>Android</summary>
 <br>
+
 - Add `google-services.json` to your `android/app` folder which is connected with your package name.
 - Add 'app_icon.png' to your `android/app/src/main/drawable` folder.
+
 </details>
 
 <details>
 <summary>IOS</summary>
 <br>
+
 - Add `GoogleService-Info.plist` to your `ios/Runner` folder which is connected with your bundle id.
 - Also setup your iOS account as per below.
 [Configure IOS for Push Notification](https://firebase.google.com/docs/cloud-messaging/ios/client)
+
 </details>
 
 ## How To Use
-
+---
 - Initialize Firebase Manager by below method in your main.dart class inside `main()` method.
 
 ```
