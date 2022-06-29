@@ -1,5 +1,6 @@
 # Firebase Messaging Manager
----
+--
+<p> This plugin will help you to configure onClick of Push Notification and also will help you to handle click of Notification. You just need to send push notification with below Format from server side.</p>
 
 ## Table Of Contents
 
@@ -9,6 +10,7 @@
 
 ## Installation
 ---
+
 - Add Below dependency in your `pubspec.yaml` file.
 
 ```
@@ -35,12 +37,13 @@ firebase_messaging_manager:
 
 - Add `GoogleService-Info.plist` to your `ios/Runner` folder which is connected with your bundle id.
 - Also setup your iOS account as per below.
-[Configure IOS for Push Notification](https://firebase.google.com/docs/cloud-messaging/ios/client)
+  [Configure IOS for Push Notification](https://firebase.google.com/docs/cloud-messaging/ios/client)
 
 </details>
 
 ## How To Use
 ---
+
 - Initialize Firebase Manager by below method in your main.dart class inside `main()` method.
 
 ```
@@ -60,6 +63,7 @@ await FirebaseMessagingManager.instance
 ```
 
 - Also you can get find device token by calling below method
+
 ```
     String? token = await FirebaseMessagingManager.instance.getToken();
 ```
