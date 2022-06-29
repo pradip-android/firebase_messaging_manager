@@ -21,16 +21,14 @@
             "id":"id",
             "body": "body",
             "title": "title",
-            "mutable_content": false
+            "mutable_content": false,
+            "click_action": "FLUTTER_NOTIFICATION_CLICK"
         },
         "data":{
             "type":"type",
-            "id":"id",
-            "click_action": "FLUTTER_NOTIFICATION_CLICK",
-            "body": "body",
-            "title": "title"
+            "id":"id"
         },
-        "to": "dBfQ3ArwSwmXB0B9mDEkpf:APA91bGDcPWgnp8VKC79H1P-u6D1fzxH0tieUvTZV-Zxui7jaVmN55S3EmonzgIpGMZrelVRukoDBdOGLe1NYodKklf6olmiAad2iqr9-1tb5obDQufLw1OYkMvlaIHXAWJ6uEgfEdAx"
+        "to": "Your_Device_Token"
       }
 ```
 
@@ -51,6 +49,7 @@
 
 ```
         {
+          "token": "Your_device_token",
           "message": {
             "topic": "news",
             "notification": {
@@ -58,11 +57,12 @@
               "body": "New news story available."
             },
             "data": {
-              "story_id": "story_12345"
+               "type":"type",
+                "id":"id",
             },
             "android": {
               "notification": {
-                 "click_action": "TOP_STORY_ACTIVITY"
+                 "click_action": "FLUTTER_NOTIFICATION_CLICK"
               }
             },
             "apns": {
