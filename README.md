@@ -53,8 +53,8 @@
           "message": {
             "topic": "news",
             "notification": {
-              "title": "Breaking News",
-              "body": "New news story available."
+              "title": "title",
+              "body": "body"
             },
             "data": {
                "type":"type",
