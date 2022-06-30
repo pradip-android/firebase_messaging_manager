@@ -103,7 +103,7 @@ Future _onNotificationSelect(String? payload) async {
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
   debugPrint("Remote Message in Background");
-  notificationMessageHandler(message);
+  //notificationMessageHandler(message);
 }
 
 notificationMessageHandler(RemoteMessage message) async {
