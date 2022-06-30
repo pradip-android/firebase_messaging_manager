@@ -49,31 +49,30 @@
 
 ```
         {
-          "token": "Your_device_token",
-          "message": {
-            "topic": "news",
+    "message": {
+        "token": "your_device_token",
+        "notification": {
+            "title": "title",
+            "body": "body"
+        },
+        "data": {
+            "type": "type",
+            "id": "id"
+        },
+        "android": {
             "notification": {
-              "title": "title",
-              "body": "body"
-            },
-            "data": {
-               "type":"type",
-                "id":"id",
-            },
-            "android": {
-              "notification": {
-                 "click_action": "FLUTTER_NOTIFICATION_CLICK"
-              }
-            },
-            "apns": {
-              "payload": {
-                "aps": {
-                  "category" : "NEW_MESSAGE_CATEGORY"
-                }
-              }
+                "click_action": "FLUTTER_NOTIFICATION_CLICK"
             }
-          }
+        },
+        "apns": {
+            "payload": {
+                "aps": {
+                    "category": "NEW_MESSAGE_CATEGORY"
+                }
+            }
         }
+    }
+}
 ```
 
 </details>
@@ -112,10 +111,10 @@ firebase_messaging_manager:
                 </intent-filter>
   ```
 - Add below line to your `android/app/build.gradle` at very bottom.
-``` apply plugin: 'com.google.gms.google-services' ```
+  ``` apply plugin: 'com.google.gms.google-services' ```
 
 - Add classpath for google-services to your `android/build.gradle` as below.
-```  classpath 'com.google.gms:google-services:4.3.10'  ```
+  ```  classpath 'com.google.gms:google-services:4.3.10'  ```
 
 </details>
 
