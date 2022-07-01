@@ -24,11 +24,27 @@ class FirebaseMessagingManager {
     await Firebase.initializeApp();
     FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
     this.notificationCallback = notificationCallback;
-    await FirebaseMessaging.instance
-        .requestPermission(announcement: true, carPlay: true, criticalAlert: true)
-        .then((value) {
-      debugPrint("Firebase status::${value.authorizationStatus}");
-    });
+    NotificationSettings settings = await FirebaseMessaging.instance.requestPermission(
+      alert: true,
+      announcement: false,
+      badge: true,
+      carPlay: false,
+      criticalAlert: false,
+      provisional: false,
+      sound: true,
+    );
+    if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+      debugPrint('User granted permission');
+    } else if (settings.authorizationStatus == AuthorizationStatus.provisional) {
+      debugPrint('User granted provisional permission');
+    } else {
+      debugPrint('User declined or has not accepted permission');
+    }
+    await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
+      alert: true,
+      badge: true,
+      sound: true,
+    );
     getToken();
     //initNotifications();
     FirebaseMessaging.onMessage.listen((message) {
