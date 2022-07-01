@@ -20,9 +20,10 @@ class FirebaseMessagingManager {
 
   NotificationCallback? notificationCallback;
 
-  Future<void> init() async {
+  Future<void> init({NotificationCallback? notificationCallback}) async {
     await Firebase.initializeApp();
     FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+    this.notificationCallback = notificationCallback;
     await FirebaseMessaging.instance
         .requestPermission(announcement: true, carPlay: true, criticalAlert: true)
         .then((value) {
@@ -36,23 +37,15 @@ class FirebaseMessagingManager {
 
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage? message) async {
       if (message != null) {
-        Future.delayed(const Duration(milliseconds: 4000), () {
-          _onLaunchNotification(message);
-        });
+        _onLaunchNotification(message);
       }
     });
 
     FirebaseMessaging.instance.getInitialMessage().then((RemoteMessage? message) async {
       if (message != null) {
-        Future.delayed(const Duration(milliseconds: 4000), () {
-          _onLaunchNotification(message);
-        });
+        _onLaunchNotification(message);
       }
     });
-  }
-
-  configureCallBackForClick(NotificationCallback notificationCallback) {
-    this.notificationCallback = notificationCallback;
   }
 
   Future<String?> getToken() async {
@@ -68,15 +61,13 @@ class FirebaseMessagingManager {
 
   _onLaunchNotification(RemoteMessage? message) async {
     debugPrint("Message: ${jsonEncode(message?.data)}");
-    notification_model.Notification? notification = notification_model.Notification.fromJson(message?.data ?? {});
-    if (notification.type != null) openNotificationDetailScreen(notification, notificationCallback);
+    openNotificationDetailScreen(message?.data ?? {}, notificationCallback);
   }
 }
 
-void openNotificationDetailScreen(
-    notification_model.Notification notification, NotificationCallback? notificationCallback) {
+void openNotificationDetailScreen(Map<String, dynamic> data, NotificationCallback? notificationCallback) {
   if (notificationCallback?.onNotificationClick != null) {
-    notificationCallback?.onNotificationClick!(id: notification.id, type: notification.type);
+    notificationCallback?.onNotificationClick!(data: data);
   }
 }
 

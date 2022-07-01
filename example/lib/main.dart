@@ -3,7 +3,8 @@ import 'package:firebase_messaging_manager/model/notification_callback.dart';
 import 'package:flutter/material.dart';
 
 void main() async {
-  await FirebaseMessagingManager.instance.init();
+  await FirebaseMessagingManager.instance
+      .init(notificationCallback: NotificationCallback(onNotificationClick: onNotificationClick));
   runApp(const MyApp());
 }
 
@@ -18,8 +19,6 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() async {
     super.initState();
-    await FirebaseMessagingManager.instance
-        .configureCallBackForClick(NotificationCallback(onNotificationClick: _onNotificationClick));
     String? token = await FirebaseMessagingManager.instance.getToken();
   }
 
@@ -36,7 +35,8 @@ class _MyAppState extends State<MyApp> {
       ),
     );
   }
+}
 
-  void _onNotificationClick({id, String? type}) {
-  }
+void onNotificationClick({Map<String, dynamic>? data}) {
+  print("onNotificationClick : $data");
 }

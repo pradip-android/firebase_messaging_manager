@@ -1,4 +1,4 @@
-typedef OnNotificationClick = void Function({String? type, dynamic id});
+typedef OnNotificationClick = void Function({Map<String, dynamic> data});
 
 class NotificationCallback {
   OnNotificationClick? onNotificationClick;

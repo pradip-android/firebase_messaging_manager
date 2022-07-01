@@ -67,7 +67,8 @@
         "apns": {
             "payload": {
                 "aps": {
-                    "category": "NEW_MESSAGE_CATEGORY"
+                    "mutable-content": 1,
+                    "content-available": 1
                 }
             }
         }
