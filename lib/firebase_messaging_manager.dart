@@ -21,7 +21,9 @@ class FirebaseMessagingManager {
   NotificationCallback? notificationCallback;
 
   Future<void> init({NotificationCallback? notificationCallback}) async {
-    await Firebase.initializeApp();
+    await Firebase.initializeApp().catchError((error) {
+      debugPrint("Firebase Initialisation Error : $error");
+    });
     FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
     this.notificationCallback = notificationCallback;
     NotificationSettings settings =
