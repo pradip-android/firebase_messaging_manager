@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_core/firebase_core.dart' as fb_core;
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_messaging_manager/model/notification_callback.dart';
 import 'package:flutter/material.dart';
@@ -21,42 +21,44 @@ class FirebaseMessagingManager {
   NotificationCallback? notificationCallback;
 
   Future<void> init({NotificationCallback? notificationCallback}) async {
-    await Firebase.initializeApp().catchError((error) {
+    try {
+      await fb_core.Firebase.initializeApp();
+      FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+      this.notificationCallback = notificationCallback;
+      NotificationSettings settings =
+          await FirebaseMessaging.instance.requestPermission(announcement: true, carPlay: true, criticalAlert: true);
+      if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+        debugPrint('User granted permission');
+      } else if (settings.authorizationStatus == AuthorizationStatus.provisional) {
+        debugPrint('User granted provisional permission');
+      } else {
+        debugPrint('User declined or has not accepted permission');
+      }
+      await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
+        alert: true,
+        badge: true,
+        sound: true,
+      );
+      getToken();
+      //initNotifications();
+      FirebaseMessaging.onMessage.listen((message) {
+        notificationMessageHandler(message);
+      });
+
+      FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage? message) async {
+        if (message != null) {
+          _onLaunchNotification(message);
+        }
+      });
+
+      FirebaseMessaging.instance.getInitialMessage().then((RemoteMessage? message) async {
+        if (message != null) {
+          _onLaunchNotification(message);
+        }
+      });
+    } catch (error) {
       debugPrint("Firebase Initialisation Error : $error");
-    });
-    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-    this.notificationCallback = notificationCallback;
-    NotificationSettings settings =
-        await FirebaseMessaging.instance.requestPermission(announcement: true, carPlay: true, criticalAlert: true);
-    if (settings.authorizationStatus == AuthorizationStatus.authorized) {
-      debugPrint('User granted permission');
-    } else if (settings.authorizationStatus == AuthorizationStatus.provisional) {
-      debugPrint('User granted provisional permission');
-    } else {
-      debugPrint('User declined or has not accepted permission');
     }
-    await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
-      alert: true,
-      badge: true,
-      sound: true,
-    );
-    getToken();
-    //initNotifications();
-    FirebaseMessaging.onMessage.listen((message) {
-      notificationMessageHandler(message);
-    });
-
-    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage? message) async {
-      if (message != null) {
-        _onLaunchNotification(message);
-      }
-    });
-
-    FirebaseMessaging.instance.getInitialMessage().then((RemoteMessage? message) async {
-      if (message != null) {
-        _onLaunchNotification(message);
-      }
-    });
   }
 
   Future<String?> getToken() async {
@@ -103,7 +105,7 @@ Future _onNotificationSelect(String? payload) async {
 }*/
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  await Firebase.initializeApp();
+  await fb_core.Firebase.initializeApp();
   debugPrint("Remote Message in Background");
   //notificationMessageHandler(message);
 }
