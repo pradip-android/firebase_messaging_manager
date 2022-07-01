@@ -84,26 +84,6 @@ void openNotificationDetailScreen(Map<String, dynamic> data, NotificationCallbac
   }
 }
 
-/*void initNotifications() async {
-  await flutterLocalNotificationsPlugin
-      .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
-      ?.createNotificationChannel(channel);
-
-  var initializationSettingsAndroid = const AndroidInitializationSettings('app_icon');
-  var initializationSettingsIOS = const IOSInitializationSettings();
-  var initializationSettings =
-      InitializationSettings(android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
-  flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-  flutterLocalNotificationsPlugin.initialize(initializationSettings, onSelectNotification: _onNotificationSelect);
-}
-
-Future _onNotificationSelect(String? payload) async {
-  if (payload != null) {
-    notification_model.Notification? notification = notification_model.Notification.fromJson(jsonDecode(payload));
-    if (notification.type != null) openNotificationDetailScreen(notification);
-  }
-}*/
-
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await fb_core.Firebase.initializeApp();
   debugPrint("Remote Message in Background");
