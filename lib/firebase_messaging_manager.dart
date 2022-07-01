@@ -24,15 +24,8 @@ class FirebaseMessagingManager {
     await Firebase.initializeApp();
     FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
     this.notificationCallback = notificationCallback;
-    NotificationSettings settings = await FirebaseMessaging.instance.requestPermission(
-      alert: true,
-      announcement: false,
-      badge: true,
-      carPlay: false,
-      criticalAlert: false,
-      provisional: false,
-      sound: true,
-    );
+    NotificationSettings settings =
+        await FirebaseMessaging.instance.requestPermission(announcement: true, carPlay: true, criticalAlert: true);
     if (settings.authorizationStatus == AuthorizationStatus.authorized) {
       debugPrint('User granted permission');
     } else if (settings.authorizationStatus == AuthorizationStatus.provisional) {
