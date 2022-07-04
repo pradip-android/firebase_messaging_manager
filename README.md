@@ -139,24 +139,13 @@ firebase_messaging_manager:
       .init(notificationCallback: NotificationCallback(onNotificationClick: _onNotificationClick));
  
 ```
-
+- To manage click of notification you have to configure Notification Callback by below.
 ```
   void _onNotificationClick({Map<String, dynamic>? data}) {
   print("Notification Click : ---------- $data");
   // Here you will get your data when tapping on Push Notification.
   }
  
-```
-
-- To manage click of notification you have to configure Notification Callback by below.
-
-```
-await FirebaseMessagingManager.instance
-        .configureCallBackForClick(NotificationCallback(onNotificationClick: _onNotificationClick));
-        
-        
-        void _onNotificationClick({id, String? type}) {
-  }
 ```
 
 - Also you can get find device token by calling below method
