@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:firebase_core/firebase_core.dart' as fb_core;
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -10,6 +11,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'model/notification.dart' as notification_model;
 
 FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+bool isAppOpen = false;
 
 class FirebaseMessagingManager {
   FirebaseMessagingManager._privateConstructor();
@@ -23,6 +25,7 @@ class FirebaseMessagingManager {
   Future<void> init({NotificationCallback? notificationCallback}) async {
     try {
       await fb_core.Firebase.initializeApp();
+      isAppOpen = true;
       FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
       this.notificationCallback = notificationCallback;
       NotificationSettings settings =
@@ -101,20 +104,22 @@ notificationMessageHandler(RemoteMessage message) async {
 Future showNotificationWithDefaultSound(
     String? id, String? title, String? body, notification_model.Notification? notification) async {
   debugPrint("Title : $title Body : $body");
-  var iOSPlatformChannelSpecifics = const IOSNotificationDetails();
-  flutterLocalNotificationsPlugin
-      .show(
-          int.parse(id ?? "0"),
-          title,
-          body,
-          NotificationDetails(
-              iOS: iOSPlatformChannelSpecifics,
-              android: AndroidNotificationDetails(channel.id, channel.name,
-                  channelDescription: channel.description, icon: 'app_icon')),
-          payload: jsonEncode(notification))
-      .catchError((error) {
-    print("Error: $error");
-  });
+  if (Platform.isAndroid || !isAppOpen) {
+    var iOSPlatformChannelSpecifics = const IOSNotificationDetails();
+    flutterLocalNotificationsPlugin
+        .show(
+            int.parse(id ?? "0"),
+            title,
+            body,
+            NotificationDetails(
+                iOS: iOSPlatformChannelSpecifics,
+                android: AndroidNotificationDetails(channel.id, channel.name,
+                    channelDescription: channel.description, icon: 'app_icon')),
+            payload: jsonEncode(notification))
+        .catchError((error) {
+      print("Error: $error");
+    });
+  }
 }
 
 const AndroidNotificationChannel channel = AndroidNotificationChannel(
