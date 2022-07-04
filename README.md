@@ -131,6 +131,8 @@ firebase_messaging_manager:
 </details>
 
 ## How To Use
+- Add below line for the import package.
+  `import 'package:firebase_messaging_manager/firebase_messaging_manager.dart';`
 
 - Initialize Firebase Manager by below method in your main.dart class inside `main()` method.
 
