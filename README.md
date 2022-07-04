@@ -17,8 +17,6 @@
 ```
       {
         "notification": {
-            "type":"type",
-            "id":"id",
             "body": "body",
             "title": "title",
             "mutable_content": false,
@@ -126,6 +124,9 @@ firebase_messaging_manager:
 - Add `GoogleService-Info.plist` to your `ios/Runner` folder which is connected with your bundle id.
 - Also setup your iOS account as per below.
   [Configure IOS for Push Notification](https://firebase.google.com/docs/cloud-messaging/ios/client)
+- Add below code if you face any error for iOS.
+  `<key>FirebaseAppDelegateProxyEnabled</key>
+  <false/>`
 
 </details>
 
