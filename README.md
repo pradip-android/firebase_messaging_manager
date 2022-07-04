@@ -142,7 +142,7 @@ firebase_messaging_manager:
 
 ```
   void _onNotificationClick({Map<String, dynamic>? data}) {
-  print("Hello : ---------- $data");
+  print("Notification Click : ---------- $data");
   // Here you will get your data when tapping on Push Notification.
   }
  
