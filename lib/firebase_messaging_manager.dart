@@ -90,6 +90,7 @@ void openNotificationDetailScreen(Map<String, dynamic> data, NotificationCallbac
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await fb_core.Firebase.initializeApp();
   debugPrint("Remote Message in Background");
+  print("Remote message arrival :${jsonEncode(message)}");
   //notificationMessageHandler(message);
 }
 
