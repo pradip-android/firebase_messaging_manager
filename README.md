@@ -135,8 +135,17 @@ firebase_messaging_manager:
 - Initialize Firebase Manager by below method in your main.dart class inside `main()` method.
 
 ```
-  await FirebaseMessagingManager.instance.init();
-  
+  await FirebaseMessagingManager.instance
+      .init(notificationCallback: NotificationCallback(onNotificationClick: _onNotificationClick));
+ 
+```
+
+```
+  void _onNotificationClick({Map<String, dynamic>? data}) {
+  print("Hello : ---------- $data");
+  // Here you will get your data when tapping on Push Notification.
+  }
+ 
 ```
 
 - To manage click of notification you have to configure Notification Callback by below.
